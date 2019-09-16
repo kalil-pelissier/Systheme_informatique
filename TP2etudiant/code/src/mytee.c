@@ -4,16 +4,16 @@
 #include <fcntl.h>
 
 void mytee(char* path) {
-	int fd = open(path, O_RDONLY, 0644);
 	char buf; 
 	int rd;
+	int fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	do
 	{
-		rd = read(fd, &buf, sizeof(char));
-		write(1, &buf, sizeof(char));
+		rd = read(0, &buf, sizeof(char));
+		write(fd, &buf, sizeof(char));
 
 	} while (rd == sizeof(char));
-	close(fd); 
+	
 }
 
 int main(int argc, char argv[]) {
