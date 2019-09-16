@@ -1,0 +1,32 @@
+CC=gcc
+AR=ar
+
+SRC = $(wildcard src/*.c) $(wildcard src/*/*.c)
+OBJ = $(addprefix obj/,$(notdir $(SRC:.c=.o)))
+
+CFLAGS = -I ./include -std=gnu99 -Wall -Werror -Wno-unused -g
+LFLAGS = -shared -g
+
+DYNAMIC = libage.so
+STATIC = libage.a
+CFLAGS += -fPIC
+
+all: $(DYNAMIC) $(STATIC)
+
+$(DYNAMIC): $(OBJ)
+	$(CC) $(OBJ) $(LFLAGS) -o $@
+
+$(STATIC): $(OBJ)
+	$(AR) rcs $@ $(OBJ)
+
+obj/%.o: src/%.c | obj
+	$(CC) $< -c $(CFLAGS) -o $@
+
+obj/%.o: src/*/%.c | obj
+	$(CC) $< -c $(CFLAGS) -o $@
+	
+obj:
+	mkdir obj
+
+clean:
+	rm $(OBJ) $(STATIC) $(DYNAMIC)
