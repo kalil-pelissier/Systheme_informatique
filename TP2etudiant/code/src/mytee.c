@@ -6,10 +6,10 @@
 #include <stdlib.h>
 	
 
-void mytee(char path) {
+void mytee(char *path) {
 	char buf; 
 	int rd, fd;
-	fd = open(&path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if(fd<0) {
 		printf("%d\n", fd);
 		exit(1);
@@ -17,13 +17,13 @@ void mytee(char path) {
 	do{
 		rd = read(0, &buf, sizeof(char));
 		write(fd, &buf, sizeof(char));
+		write(1, &buf, sizeof(char));
 	} while (rd == sizeof(char));
 }
 
 
 
-int main(int argc, char argv[]) {
-
+int main(int argc, char** argv) {
 mytee(argv[1]);
 
 }

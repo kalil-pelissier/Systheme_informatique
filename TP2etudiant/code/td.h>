@@ -1,0 +1,48 @@
+STRCMP(3)                  Linux Programmer's Manual                 STRCMP(3)
+
+NNAAMMEE
+       strcmp, strncmp - compare two strings
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ssttrriinngg..hh>>
+
+       iinntt ssttrrccmmpp((ccoonnsstt cchhaarr **_s_1,, ccoonnsstt cchhaarr **_s_2));;
+
+       iinntt ssttrrnnccmmpp((ccoonnsstt cchhaarr **_s_1,, ccoonnsstt cchhaarr **_s_2,, ssiizzee__tt _n));;
+
+DDEESSCCRRIIPPTTIIOONN
+       The  ssttrrccmmpp()  function compares the two strings _s_1 and _s_2.  It returns
+       an integer less than, equal to, or greater than zero if  _s_1  is  found,
+       respectively, to be less than, to match, or be greater than _s_2.
+
+       The  ssttrrnnccmmpp()  function  is similar, except it compares only the first
+       (at most) _n bytes of _s_1 and _s_2.
+
+RREETTUURRNN VVAALLUUEE
+       The ssttrrccmmpp() and ssttrrnnccmmpp() functions return an integer less than, equal
+       to, or greater than zero if _s_1 (or the first _n bytes thereof) is found,
+       respectively, to be less than, to match, or be greater than _s_2.
+
+AATTTTRRIIBBUUTTEESS
+       For  an  explanation  of  the  terms  used   in   this   section,   see
+       aattttrriibbuutteess(7).
+
+       ┌────────────────────┬───────────────┬─────────┐
+       │IInntteerrffaaccee           │ AAttttrriibbuuttee     │ VVaalluuee   │
+       ├────────────────────┼───────────────┼─────────┤
+       │ssttrrccmmpp(), ssttrrnnccmmpp() │ Thread safety │ MT-Safe │
+       └────────────────────┴───────────────┴─────────┘
+CCOONNFFOORRMMIINNGG TTOO
+       POSIX.1-2001, POSIX.1-2008, C89, C99, SVr4, 4.3BSD.
+
+SSEEEE AALLSSOO
+       bbccmmpp(3),   mmeemmccmmpp(3),   ssttrrccaasseeccmmpp(3),   ssttrrccoollll(3),  ssttrriinngg(3),  ssttrrnn‐‐
+       ccaasseeccmmpp(3), ssttrrvveerrssccmmpp(3), wwccssccmmpp(3), wwccssnnccmmpp(3)
+
+CCOOLLOOPPHHOONN
+       This page is part of release 4.15 of the Linux  _m_a_n_-_p_a_g_e_s  project.   A
+       description  of  the project, information about reporting bugs, and the
+       latest    version    of    this    page,    can     be     found     at
+       https://www.kernel.org/doc/man-pages/.
+
+                                  2015-08-08                         STRCMP(3)
