@@ -1,4 +1,6 @@
 #include <memalloc.h>
+ #include <unistd.h>
+
 
 typedef struct bloc_entete
 {
@@ -18,7 +20,7 @@ void blocinfo0(void* ptr)
 //TODO
 void* myalloc0(size_t t)
 {
-  return NULL;
+  return sbrk(ALIGN(ENTETE_SIZE + t));
 };
 
 //TODO
