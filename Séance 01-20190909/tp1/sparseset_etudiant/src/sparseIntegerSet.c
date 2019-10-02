@@ -21,20 +21,36 @@ int sparseIntegerSet_insert(struct age_t *age, sparseIntegerSet_t *is, unsigned 
 		is->capacity = newCapacity;
 	}
 
-	is->dense[is->population] = i;
-	is->sparse[i] = is->population;
-   	is->population++;
-	return OK;
+	unsigned int a = is->sparse[i];
+	unsigned int n = is->population;
+
+	if(!(a < n && is->dense[a] == i)) {
+		is->sparse[i] = n;
+		is->dense[n] = i;
+		is->population = n + 1;
+		return OK;  
+	}
+	return KO;
 
 };
 
 //retirer un entier de l'ensemble
 int sparseIntegerSet_delete(struct age_t *age, sparseIntegerSet_t *is, unsigned int i){
 	
-	is->population--;
-	is->dense[is->sparse[i]]=is->dense[is->population];
-	is->sparse[is->dense[is->population]]=is->sparse[i];
-	return OK;
+	if(i >= is->capacity || is->population == 0) {
+		return KO;
+	}
+	unsigned int a = is->sparse[i];
+	unsigned int n = is->population - 1;
+
+	if(a <= n  || is->dense[a] == i) {
+		unsigned int e = is->dense[n];
+		is->population = n;
+		is->dense[a] = e;
+		is->sparse[e] = a;
+		return OK;
+	}
+	return KO;
 };
 //vider completement l ensemble
 void sparseIntegerSet_clear(struct age_t *age, sparseIntegerSet_t *is) {
@@ -46,7 +62,8 @@ is->population = 0;
 //demander si l ensemble est vide
 int sparseIntegerSet_isEmpty(struct age_t *age, sparseIntegerSet_t *is) {
 
-    	return(is->population==0);
+    return(is->population==0);
+
 };
 	
 //retirer la valeur en tete 
@@ -65,5 +82,10 @@ void sparseIntegerSet_free(struct age_t *age, sparseIntegerSet_t *is){
 
 int sparseIntegerSet_contains(struct age_t  *age, struct sparseIntegerSet_t *is, unsigned int i) {
     
-	return (i==is->dense[is->sparse[i]]);
+    if(i >= is->capacity){
+    	return 0;
+    }
+    unsigned int a = is->sparse[i];
+    unsigned int n = is->population;
+	return a < n && is->dense[a] == i;
 }
