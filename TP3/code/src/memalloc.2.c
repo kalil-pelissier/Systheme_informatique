@@ -1,28 +1,20 @@
 #include <age.h>
+#include <memalloc.h>
 
-/*
- * Gestion des blocs avec une liste chainee
- */
-typedef struct bloc_entete
-{
-  size_t taille; //taille du bloc utilisateur
-  struct bloc_entete* suivant_ptr ;    // pointeur sur le bloc suivant dans la liste
-  struct bloc_entete* precedent_ptr ;    // pointeur sur le bloc precedent dans la liste
-  
-} bloc_entete ;
 
-//TODO
+void bloc_info2(void* ptr){
+    bloc_info1(ptr);
+}
+
+//todo
 void* myalloc2(size_t t)
 {
-return NULL;
+return 0;
 };
-//TODO
-void blocinfo2(void* ptr){
 
-}
-//TODO
+
+//todo
 void myfree2(void* ptr)
 {
-
   return;
 }

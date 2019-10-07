@@ -9,19 +9,20 @@
 #include <sprite.h>
 #include <unistd.h>
 #include <assert.h>
+#include <memalloc.h>
+#include <time.h>
+
 
 //TODO: Objectif de la seance realiser vos propores fonctions de malloc et free. 
-void myfree(void*);
-void* mymalloc(size_t);
 
 struct age_t* ge;
 
-void startTest()
+void startTest0()
 {
-    allocate_age( mymalloc, myfree, &ge);
+    allocate_age( myalloc0, myfree0, &ge);
 }
 
-void endTest(){
+void endTest0(){
     age_free(ge);
 }
 
@@ -29,14 +30,14 @@ void endTest(){
 
 int testEtape0()
 {
-    startTest();    
+    startTest0();    
     age_initialize(ge);
     {
   //allocation d'un tableau
   srand (time(NULL));
   int taille = 1 + (rand() % TAILLE_MAX);
-  int* buffer = (int*)myalloc(taille*sizeof(int));
-  printf("allocation de %d entiers (%d octect par entier) à: %p \n",taille,sizeof(int),(void*)buffer);
+  int* buffer = (int*)myalloc0(taille*sizeof(int));
+  printf("allocation de %d entiers (%d octect par entier) a: %p \n",taille,(int)sizeof(int),(void*)buffer);
   int i ;
   for( i = 0; i < taille ; i++)
     {
@@ -46,11 +47,11 @@ int testEtape0()
     {
       assert(buffer[i] == taille-i);
     }
-  blocinfo0(buffer);
+  bloc_info0(buffer);
   myfree0(buffer);
-  blocinfo0(buffer);
+  bloc_info0(buffer);
     }
-    endTest();    
+    endTest0();    
     return OK;
 }
 
@@ -89,7 +90,7 @@ void test12()
       buffer_ptr = myalloc1(1024*sizeof(char));
       printf("allocation de 1024 bytes à %p \n",buffer_ptr);
       assert(buffer_ptr != NULL);
-      blocinfo1(buffer_ptr);
+      bloc_info1(buffer_ptr);
     }
   else
     {
@@ -160,7 +161,7 @@ void test22()
       buffer_ptr = myalloc2(1024*sizeof(char));
       printf("allocation de 1024 bytes à %p \n",buffer_ptr);
       assert(buffer_ptr != NULL);
-      blocinfo2(buffer_ptr);
+      bloc_info2(buffer_ptr);
     }
   else
     {

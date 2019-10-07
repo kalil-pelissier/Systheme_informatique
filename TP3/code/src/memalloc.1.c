@@ -7,20 +7,19 @@ typedef struct bloc_entete
 } bloc_entete ;
 
 
-
-//TODO
+//todo
 void* myalloc1(size_t t)
 {
-  return NULL;
+return 0;
 };
 
-//TODO
+//todo
 void myfree1(void* ptr)
 {
+
   return;
 }
 
-//TODO
-void blocinfo1(void* ptr){
-  
+void bloc_info1(void* ptr){
+    bloc_info0(ptr);
 }
