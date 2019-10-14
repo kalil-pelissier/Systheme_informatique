@@ -19,7 +19,16 @@ void bloc_info0(void* ptr)
 //todo
 void* myalloc0(size_t t)
 {
+  int taille = ALIGN(t)+ENTETE_SIZE;
+  void* ptr = sbrk(taille);
   
+  //initialisation de mon entet
+  bloc_entete* entete = (bloc_entete*)ptr;
+  entete->libre = 0;
+  entete->taille = taille;
+
+  ptr = ptr+ENTETE_SIZE;
+  return ptr;
 };
 
 //todo

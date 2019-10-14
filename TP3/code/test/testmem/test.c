@@ -55,75 +55,75 @@ int testEtape0()
     return OK;
 }
 
-// void test10()
-// {
-//   int i = 1;
-//   int* table_des_pointeurs[10]; 
-//   for(i = 0; i< 10; i++)
-//     { 
-//       int taille = (i+1)*sizeof(int);
-//       table_des_pointeurs[i] = myalloc1(taille);
-//       printf("allocation de %d bytes à %p \n",taille,table_des_pointeurs[i]);
-//       int j ;
-//       for( j = 0; j < taille ; j++)
-// 	{
-// 	  table_des_pointeurs[i][j] = taille-j;
-// 	}  
-//       for( j = 0; j < taille ; j++)
-// 	{
-// 	  assert( table_des_pointeurs[i][j] == taille-j);
-// 	}
-//     }
+void test10()
+{
+  int i = 1;
+  int* table_des_pointeurs[10]; 
+  for(i = 0; i< 10; i++)
+    { 
+      int taille = (i+1)*sizeof(int);
+      table_des_pointeurs[i] = myalloc1(taille);
+      printf("allocation de %d bytes à %p \n",taille,table_des_pointeurs[i]);
+      int j ;
+      for( j = 0; j < taille ; j++)
+	{
+	  table_des_pointeurs[i][j] = taille-j;
+	}  
+      for( j = 0; j < taille ; j++)
+	{
+	  assert( table_des_pointeurs[i][j] == taille-j);
+	}
+    }
   
-//   for(i = 0; i< 10; i++)
-//     {
-//       myfree1(table_des_pointeurs[i]);
-//     }
+  for(i = 0; i< 10; i++)
+    {
+      myfree1(table_des_pointeurs[i]);
+    }
  
-// }
+}
 
-// void test12()
-// {
-//   static char* buffer_ptr = NULL;
-//   if(buffer_ptr == NULL)
-//     {
-//       buffer_ptr = myalloc1(1024*sizeof(char));
-//       printf("allocation de 1024 bytes à %p \n",buffer_ptr);
-//       assert(buffer_ptr != NULL);
-//       bloc_info1(buffer_ptr);
-//     }
-//   else
-//     {
-//       myfree1(buffer_ptr);
-//     }
-// };
-// void test11()
-// {
-//   int i ;
-//   for(i = 10; i> 0; i--)
-//     { 
-//       int taille = i*sizeof(int);
-//       int* buffer = myalloc1(taille);
-//       printf("allocation de %d bytes à %p \n",taille,buffer);
-//       int j ;
-//       for( j = 0; j< taille ; j++)
-// 	{
-// 	  buffer[j] = taille-j;
-// 	}  
-//       for( j = 0; j < taille ; j++)
-// 	{
-// 	  assert(buffer[j] == taille-j);
-// 	}
-//       myfree1(buffer);
-//     }
-// }
+void test12()
+{
+  static char* buffer_ptr = NULL;
+  if(buffer_ptr == NULL)
+    {
+      buffer_ptr = myalloc1(1024*sizeof(char));
+      printf("allocation de 1024 bytes à %p \n",buffer_ptr);
+      assert(buffer_ptr != NULL);
+      bloc_info1(buffer_ptr);
+    }
+  else
+    {
+      myfree1(buffer_ptr);
+    }
+};
+void test11()
+{
+  int i ;
+  for(i = 10; i> 0; i--)
+    { 
+      int taille = i*sizeof(int);
+      int* buffer = myalloc1(taille);
+      printf("allocation de %d bytes à %p \n",taille,buffer);
+      int j ;
+      for( j = 0; j< taille ; j++)
+	{
+	  buffer[j] = taille-j;
+	}  
+      for( j = 0; j < taille ; j++)
+	{
+	  assert(buffer[j] == taille-j);
+	}
+      myfree1(buffer);
+    }
+}
 
 
-// void testEtape1(){
-// test10();
-// test11();
-// test12();
-// }
+void testEtape1(){
+test10();
+test11();
+test12();
+}
 
 
 // void test20()
@@ -199,8 +199,8 @@ int testEtape0()
 int main() {
     printf("starting...\n");
     fflush(stdout);
-    testEtape0();
-    // testEtape1(); //Retirer le commentaire si besoin
+    // testEtape0();
+    testEtape1(); //Retirer le commentaire si besoin
     // testEtape2();
     printf("end...\n");
     fflush(stdout);

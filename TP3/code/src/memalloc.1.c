@@ -1,4 +1,5 @@
 #include <memalloc.h>
+#include <stdio.h>
 
 typedef struct bloc_entete
 {
@@ -6,18 +7,46 @@ typedef struct bloc_entete
  unsigned short libre : 1 ; //drapeau de 1 bit qui indique si le bloc est libre ou utilise: 1 libre, 0 utilise.
 } bloc_entete ;
 
+ void* start;
+ int initialiser;
+ 	
 
-//todo
-void* myalloc1(size_t t)
-{
-return 0;
-};
+void* myalloc1(size_t t){
+	//initialisatio de start pour le premier myalloc1
+	if(initialiser == 0) {
+  	initialiser = 1;
+  	start = sbrk(0);
+  	printf("initialiser");
+ };
+
+ 	 void* fin = sbrk(0);
+	 void* current = start;
+
+   do{
+   		bloc_entete* entete = (bloc_entete*)current;
+
+   		int blocklib = entete->libre; 
+    	int blocktaille = entete->taille; 
+
+   		if(blocklib == 1 && blocktaille >= t) {
+   			printf("recycler");
+   			current = current+ENTETE_SIZE;
+   			return current;
+   		}
+
+   		current = current + blocktaille;
+
+   }while(current < fin);
+
+   		return myalloc0(t);
+}
 
 //todo
 void myfree1(void* ptr)
 {
-
-  return;
+	void* temp = ptr-ENTETE_SIZE;
+	bloc_entete* t = (bloc_entete*)temp;
+	t->libre = 1;
 }
 
 void bloc_info1(void* ptr){
