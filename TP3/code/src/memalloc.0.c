@@ -19,13 +19,15 @@ void bloc_info0(void* ptr)
 //todo
 void* myalloc0(size_t t)
 {
-  return 0;
+  
 };
 
 //todo
 void myfree0(void* ptr)
 {
-  return;
+	void* temp = ptr-ENTETE_SIZE;
+	bloc_entete* t = (bloc_entete*)temp;
+	t->libre = 1;
 }
 
 
