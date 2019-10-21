@@ -16,7 +16,7 @@ void* myalloc1(size_t t){
 	if(initialiser == 0) {
   	initialiser = 1;
   	start = sbrk(0);
-  	printf("initialiser");
+    return myalloc0(t);
  };
 
  	 void* fin = sbrk(0);
@@ -28,20 +28,19 @@ void* myalloc1(size_t t){
    		int blocklib = entete->libre; 
     	int blocktaille = entete->taille; 
 
-   		if(blocklib == 1 && blocktaille >= t) {
-   			printf("recycler");
-   			current = current+ENTETE_SIZE;
+   		if(blocklib == 1 && blocktaille >= ENTETE_SIZE+t) {
+   			current += ENTETE_SIZE;
    			return current;
    		}
 
-   		current = current + blocktaille;
+   		current += blocktaille;
 
    }while(current < fin);
 
    		return myalloc0(t);
 }
 
-//todo
+
 void myfree1(void* ptr)
 {
 	void* temp = ptr-ENTETE_SIZE;
