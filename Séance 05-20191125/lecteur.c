@@ -4,8 +4,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <linux/stat.h>
-#define FIFO_PATH
-"/tmp/MAFIFO"
+#define FIFO_PATH "/tmp/MAFIFO"
 int main(void)
 {
 FILE *fp;

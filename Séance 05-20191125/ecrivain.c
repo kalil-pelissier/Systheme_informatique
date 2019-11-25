@@ -1,8 +1,7 @@
 //code de ecrivain
 #include <stdio.h>
 #include <stdlib.h>
-#define FIFO_PATH
-"/tmp/MAFIFO"
+#define FIFO_PATH "/tmp/MAFIFO"
 int main(int argc, char *argv[])
 {
 FILE *fp;
