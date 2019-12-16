@@ -3,8 +3,6 @@ extern char instrument[5];
 //nom de la variable mesuree
 extern char varName[5];
 
-#define BUFFER_SIZE 4
-
 struct requete_client_serveur {
 pid_t client_pid; //PID du Client
 char instrument[5]; // code l instrument
@@ -12,14 +10,15 @@ char variable[5]; // nom de la var mesuree
 char value[4]; //valeur de la var mesuree
 };
 
+
 //programme du client
 int main()
 {
 int serveur,client;
 char path, requeste;
 
-pid-t pid = getpid();
-sprintf(path,"/temp/client/client_'%s'_fifo",pid);
+pid_t pid = getpid();
+sprintf(path,"/temp/client/client_%s_fifo",pid);
 mkfifo(path);
 //creation du tube nomme pour ce process
 //TODO
@@ -31,7 +30,7 @@ int value;
 getValue(varName, &value);//fonction existante pour faire mesure
 //TODO
 //Preparation du message pour le serveur
-struct requete_client_serveur* requete;
+struct requete_client_serveur requete;
 requete->client_pid = pid;
 requete->value = value;
 requete->variable = varName;
